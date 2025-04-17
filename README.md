@@ -39,7 +39,7 @@ cd cyber-attack-analyzer
 
 ---
 
-##🧑‍💻 Project Team
+## 🧑‍💻 Project Team
 
 👑 Team Lead: Anika Dewari
 
@@ -51,7 +51,7 @@ cd cyber-attack-analyzer
 
 ---
 
-💡 Disclaimer
+## 💡 Disclaimer
 
 This project is strictly for educational purposes and ethical hacking.
 
