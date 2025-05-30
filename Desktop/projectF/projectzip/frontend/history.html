@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan History - CyberPBL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar h1 {
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        .user-info {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info span {
+            color: #4CAF50;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: #45a049;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .history-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .history-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .history-card h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-card .timestamp {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .history-card .target {
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .history-card .result {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 5px;
+            color: #fff;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .no-history {
+            text-align: center;
+            color: #fff;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>CyberPBL</h1>
+        <div class="user-info">
+            Welcome, <span id="username">User</span>
+        </div>
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-button">Home</a>
+            <button class="nav-button" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="history-grid" id="historyGrid">
+            <!-- History cards will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        async function checkAuth() {
+            try {
+                const response = await fetch('http://localhost:3000/api/login', {
+                    credentials: 'include'
+                });
+                
+                if (!response.ok) {
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Load scan history
+        async function loadHistory() {
+            try {
+                const response = await fetch('http://localhost:3000/api/history', {
+                    credentials: 'include'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to load history');
+                }
+
+                const history = await response.json();
+                const historyGrid = document.getElementById('historyGrid');
+
+                if (history.length === 0) {
+                    historyGrid.innerHTML = `
+                        <div class="no-history">
+                            <h2>No scan history found</h2>
+                            <p>Your scan results will appear here</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                historyGrid.innerHTML = history.map(scan => `
+                    <div class="history-card">
+                        <h3>
+                            ${scan.type} Scan
+                            <span class="timestamp">${new Date(scan.timestamp).toLocaleString()}</span>
+                        </h3>
+                        <div class="target">Target: ${scan.target}</div>
+                        <div class="result">${JSON.stringify(scan.result, null, 2)}</div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading history:', error);
+            }
+        }
+
+        // Logout function
+        function logout() {
+            document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            window.location.href = 'login.html';
+        }
+
+        // Check authentication and load history on page load
+        checkAuth();
+        loadHistory();
+    </script>
+</body>
+</html> 

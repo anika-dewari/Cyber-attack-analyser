@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CYBER SPY</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 1rem;
+            color: #fff;
+        }
+
+        .switch-form a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .switch-form a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ff4444;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CyberPBL</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+            <div class="error-message" id="errorMessage"></div>
+        </form>
+        <div class="switch-form">
+            Don't have an account? <a href="register.html">Register</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            try {
+                const response = await fetch('/api/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password }),
+                    credentials: 'include'
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Store user data in localStorage for frontend use
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    window.location.href = 'index.html';
+                } else {
+                    errorMessage.textContent = data.error;
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                errorMessage.textContent = 'An error occurred. Please try again.';
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html> 
