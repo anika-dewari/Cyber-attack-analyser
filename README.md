@@ -1,63 +1,12 @@
-# 🔐 Cyber Attack Analyzer
+# React + Vite
 
-Cyber Attack Analyzer is a lightweight, open-source vulnerability scanning tool designed to detect common security weaknesses in websites and networks.\
-It’s a perfect starting point for ethical hackers, cybersecurity learners, and small businesses looking to assess their security posture without investing in expensive tools!
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## 💡 Features
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- ✅ Detects **Open Ports**.
-- ✅ Identifies **Running Services** on open ports.
-- ✅ Checks for **SQL Injection** vulnerability patterns.
-- ✅ Detects **Cross-Site Scripting (XSS)** opportunities.
-- ✅ Scans for **Security Header Misconfigurations**.
-- ✅ Easy-to-read **report generation**.
-- ✅ Beginner-friendly codebase for cybersecurity enthusiasts.
+## Expanding the ESLint configuration
 
----
-
-## ⚙️ Technologies Used
-
-- Python 3.x
-- `socket` — for network communication.
-- `requests` — for web-based scanning.
-- `nmap` (optional) — for deep port & OS detection.
-- `BeautifulSoup` — for parsing web responses.
-- MongoDB (optional) — for result storage.
-
----
-
-## 🚀 How to Run
-
-1. Clone this repository:
-
-```bash
-git clone https://github.com/your-username/cyber-attack-analyzer.git
-cd cyber-attack-analyzer
-```
-
----
-
-## 🧑‍💻 Project Team
-
-👑 Team Lead: Anika Dewari
-
-💻 Team Members:
-
-- Shalini Chauhan
-- Astha Kavtiyal
-- Aditya Thapliyal
-
----
-
-## 💡 Disclaimer
-
-This project is strictly for educational purposes and ethical hacking.
-
-Do not run scans on servers you don’t own or don’t have permission to test.
-
-Unauthorized scanning may be illegal!
-
-
-
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
