@@ -59,9 +59,9 @@ export default function History() {
             No scan history available. Start scanning to see results here!
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-6 ">
             {scanHistory.map((scan, index) => (
-              <div key={scan._id} className="bg-[#1A1D24] p-6 rounded-xl shadow-lg">
+              <div key={scan._id} className="bg-[#1A1D24] p-6 rounded-xl shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h2 className="text-2xl text-white font-bold">

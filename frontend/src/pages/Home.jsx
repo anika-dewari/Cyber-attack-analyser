@@ -105,8 +105,8 @@ export default function Home() {
 
   return (
     <div className="h-full w-full relative overflow-x-hidden">
+      // Background gradient for visual effect
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-cyan-600/20 via-teal-600/10 to-purple-700/20 animate-pulse blur-3xl pointer-events-none z-0" />
-
       <main className="min-h-screen w-full flex items-center justify-center py-20 bg-[#0B0B14]">
         <div className="max-w-7xl w-full grid md:grid-cols-2 items-center gap-10 px-4">
           <div className="space-y-8">
@@ -153,7 +153,7 @@ export default function Home() {
                 <button
                   type="submit"
                   disabled={loading || !isAuthenticated}
-                  className="flex-1 py-3 bg-gradient-to-r from-cyan-400 to-teal-700 font-extrabold rounded-2xl text-[#0f1117] shadow-lg shadow-cyan-500/70 hover:from-cyan-300 hover:to-teal-600 hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 py-3 bg-gradient-to-r from-cyan-400 to-teal-700 font-extrabold rounded-2xl text-white shadow-cyan-500/70 hover:from-cyan-300 hover:to-teal-600 hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Scanning...' : 'Start Scan'}
                 </button>
@@ -161,7 +161,7 @@ export default function Home() {
                   type="button"
                   onClick={(e) => handleScan(e, true)}
                   disabled={loading || !isAuthenticated}
-                  className="flex-1 py-3 bg-gradient-to-r from-purple-400 to-pink-700 font-extrabold rounded-2xl text-[#0f1117] shadow-lg shadow-purple-500/70 hover:from-purple-300 hover:to-pink-600 hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 py-3 bg-gradient-to-r from-purple-400 to-pink-700 font-extrabold rounded-2xl text-white shadow-lg shadow-purple-500/70 hover:from-purple-300 hover:to-pink-600 hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Scanning...' : 'Full Scan'}
                 </button>

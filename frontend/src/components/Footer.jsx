@@ -8,7 +8,7 @@ const Footer = () => {
         {/* Logo & Brand */}
         <div className="flex items-center space-x-2">
           <img src={logo} alt="KillSwitch Logo" className="h-10 w-auto object-contain" style={{maxHeight:'40px'}} />
-          <span className="text-2xl font-bold text-white tracking-widest">KillSwitch</span>
+          <span className="text-2xl font-bold text-white tracking-widest hover:text-cyan-400">KillSwitch</span>
         </div>
 
         {/* Links & Message */}

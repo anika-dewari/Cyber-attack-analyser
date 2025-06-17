@@ -8,7 +8,7 @@ const path = require('path');
 const app = express();
 
 const PORT = 5000;
-const MONGODB_URI = 'mongodb://localhost:27017/cyberpbl';
+const MONGODB_URI = 'mongodb://127.0.0.1:27017/cyberpbl';
 const JWT_SECRET = 'cyberpbl_secret_key_2024';
 
 // Routes
