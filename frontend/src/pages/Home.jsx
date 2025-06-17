@@ -8,7 +8,8 @@ import { useAuth } from '../context/AuthContext';
 import { API_ENDPOINTS } from '../config/api';
 import lockImage from '../assets/lockandkey.png';
 
-const SCAN_TYPES = ['clickjacking', 'xss', 'sql', 'port', 'malicious', 'cve'];
+const SCAN_TYPES = ['clickjacking', 'xss', 'sql', 'port', 'malicious', 'cve', 'webscraper', 'vulnerability'];
+
 
 export default function Home() {
   const navigate = useNavigate();
@@ -128,7 +129,16 @@ export default function Home() {
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   className="mt-1 block w-full rounded-xl bg-[#0f121a] text-white p-3 shadow-inner shadow-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-                  placeholder="Enter URL to scan"
+                  placeholder={
+                    scanType === 'cve'
+                     ? 'Enter CVE ID (e.g. CVE-2021-41773)'
+                     : scanType === 'webscraper'
+                     ? 'Enter webpage URL to scrape'
+                     : scanType === 'vulnerability'
+                     ? 'Enter software name or version'
+                     : 'Enter URL to scan'
+                  }
+
                   required
                 />
               </div>
@@ -146,6 +156,9 @@ export default function Home() {
                   <option value="port">Port Scanner</option>
                   <option value="malicious">Malicious URL Scanner</option>
                   <option value="cve">CVE Lookup</option>
+                  <option value="webscraper">Web Scraper</option>
+                  <option value="vulnerability">Vulnerability Lookup</option>
+
                 </select>
               </div>
 

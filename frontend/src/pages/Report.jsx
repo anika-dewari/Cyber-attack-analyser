@@ -17,6 +17,7 @@ const damageDescriptions = {
   'XSS': 'Injects malicious scripts into webpages viewed by other users.',
   'Malicious URL': 'Redirects users to phishing/malware websites.',
   'Vulnerability Lookup': 'Reveals known CVEs associated with your stack or software.',
+  'Web Scraper': 'Analyzes the public content of your site for exposed sensitive information.',
 };
 
 const normalizeScanType = (type) => {
@@ -26,7 +27,8 @@ const normalizeScanType = (type) => {
   if (t.includes('sql')) return 'SQL Injection';
   if (t.includes('port')) return 'Port Scanner';
   if (t.includes('malicious')) return 'Malicious URL';
-  if (t.includes('cve')) return 'Vulnerability Lookup';
+  if (t.includes('cve') || t.includes('vulnerability')) return 'Vulnerability Lookup';
+  if (t.includes('webscraper')) return 'Web Scraper';
   return type.charAt(0).toUpperCase() + type.slice(1);
 };
 
@@ -46,6 +48,7 @@ const calculateVulnerabilityRate = (scanType, results) => {
       if (vulns.length === 0) return 0;
       const maxExpectedVulns = 3;
       return Math.min((vulns.length / maxExpectedVulns) * 100, 100);
+    case 'Web Scraper': return results.vulnerable ? 100 : 0;
     default:
       return 0;
   }
@@ -75,6 +78,10 @@ const formatScanResults = (scanType, results) => {
     case 'Vulnerability Lookup': return results.vulnerabilities?.length > 0
       ? `Found ${results.vulnerabilities.length} vulnerabilities`
       : 'No vulnerabilities found';
+    case 'Web Scraper':
+      return results.vulnerable
+        ? 'Web scraping detected sensitive vulnerabilities'
+        : 'No critical data leaks found during web scraping';
     default:
       return JSON.stringify(results, null, 2);
   }

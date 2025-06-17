@@ -8,7 +8,8 @@ const scanSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-        enum: ['port', 'xss', 'sql', 'malicious', 'clickjacking', 'cve']
+       enum: ['port', 'xss', 'sql', 'malicious', 'clickjacking', 'cve', 'webscraper', 'vulnerability' ]
+
     },
     result: {
         type: mongoose.Schema.Types.Mixed,
